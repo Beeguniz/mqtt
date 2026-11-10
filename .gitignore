@@ -1,0 +1,13 @@
+# MQTT Broker
+password_file
+.env
+mosquitto/data/
+mosquitto/log/
+
+firmware/src/secrets.h
+firmware/.pio/
+broker/mosquitto/data/
+broker/mosquitto/log/
+
+.vscode/
+*.log

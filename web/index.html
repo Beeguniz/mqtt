@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nhà kính • Điều khiển MQTT</title><link rel="stylesheet" href="style.css">
+<script src="vendor/mqtt.min.js" defer></script><script src="app.js" defer></script></head>
+<body><main>
+<header><div><p class="eyebrow">THỰC HÀNH 04 / MQTT</p><h1>Nhà kính của bạn</h1><p>Theo dõi môi trường và điều khiển thiết bị tại chỗ.</p></div><span id="connection" class="badge" role="status">Chưa kết nối</span></header>
+<section class="panel"><h2>Kết nối broker</h2>
+<form id="connectForm"><div class="fields">
+<label>Địa chỉ WebSocket<input id="url" required placeholder="ws://192.168.1.10:9001" value="ws://localhost:9001"></label>
+<label>Topic gốc<input id="topic" required value="nhom01/node01" pattern="[A-Za-z0-9_-]+/[A-Za-z0-9_-]+"></label>
+<label>Tài khoản<input id="username" autocomplete="username"></label>
+<label>Mật khẩu<input id="password" type="password" autocomplete="current-password"></label>
+</div><div class="actions"><button id="connect">Kết nối</button><button id="disconnect" class="secondary" type="button" disabled>Ngắt kết nối</button><small>Broker local không dùng tài khoản: để trống cả hai ô.</small></div></form></section>
+<section aria-label="Cảm biến" class="grid sensors">
+<article class="panel"><p>Nhiệt độ</p><strong id="temp">—</strong><span> °C</span></article>
+<article class="panel"><p>Độ ẩm không khí</p><strong id="humi">—</strong><span> %</span></article>
+<article class="panel"><p>Cảm biến mưa</p><strong class="small">Chưa có dữ liệu</strong><p>Gói UNO hiện tại chỉ có nhiệt độ và độ ẩm.</p></article>
+</section><div class="section-title"><div><h2>Thiết bị</h2><p id="freshness">Đang chờ phản hồi từ ESP32.</p></div><button type="button" id="stopAll" class="danger" disabled>Dừng tất cả</button></div>
+<section id="devices" class="grid" aria-label="Điều khiển thiết bị"></section>
+<p class="note">Mỗi lần chạy tối đa 20 giây. Hệ thống dừng khi cảm biến lỗi hoặc mất kết nối broker. Trạng thái hiển thị là phản hồi từ ESP32.</p>
+<section class="panel"><h2>Dữ liệu JSON từ ESP32</h2>
+<p>Bản tin mới nhất trong phiên kết nối hiện tại. Thời gian nhận do máy tính ghi lại.</p>
+<label for="jsonType">Loại dữ liệu</label>
+<select id="jsonType"><option value="telemetry">Cảm biến (telemetry)</option><option value="state">Trạng thái thiết bị (state)</option></select>
+<p id="jsonInfo">Chưa nhận dữ liệu.</p>
+<pre id="jsonView" style="background:#f2f5f2;padding:16px;border-radius:8px;overflow:auto;max-height:420px;white-space:pre;font-size:14px">Chưa nhận dữ liệu.</pre>
+<button type="button" id="downloadJson" disabled>Tải file JSON</button>
+</section>
+<section class="panel"><h2>Nhật ký phiên</h2><p id="notice" role="status">Nhập thông tin broker để bắt đầu.</p><ol id="log"></ol></section>
+<footer>LED1 · LED2 · MOTOR1 &nbsp; / &nbsp; MOTOR2 không được sử dụng.</footer>
+</main></body></html>
